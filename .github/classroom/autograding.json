@@ -1,0 +1,15 @@
+{
+  "tests": [
+    {
+      "name": "Part1: Run pipeline",
+      "run": "pytest tests/test_submission.py::test_pipeline_completes -q",
+      "points": 25
+    },
+    {
+      "name": "Part1: Function signatures",
+      "run": "pytest tests/test_submission.py::test_function_signatures -q",
+      "points": 15
+    }
+
+  ]
+}
