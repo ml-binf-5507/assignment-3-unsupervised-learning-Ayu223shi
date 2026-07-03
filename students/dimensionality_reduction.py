@@ -5,12 +5,13 @@ Students implement three wrappers that apply PCA, t-SNE, and UMAP to a feature
 matrix X and return the transformed data.
 """
 
-from typing import Any
-
+from sklearn.decomposition import PCA
+from sklearn.manifold import TSNE
+import umap.umap_ as umap
 import numpy as np
 
 
-def apply_pca(X: np.ndarray, n_components: int = 2, random_state: int = 42) -> np.ndarray:
+def apply_pca(X, n_components = 2, random_state = 42):
     """Perform PCA on the input array.
 
     Parameters
@@ -27,22 +28,23 @@ def apply_pca(X: np.ndarray, n_components: int = 2, random_state: int = 42) -> n
     np.ndarray
         Transformed data with shape (n_samples, n_components).
     """
-    raise NotImplementedError("Implement PCA transformation here")
+    pca = PCA(n_components=n_components, random_state=random_state)
+    return pca.fit_transform(X)
 
-
-def apply_tsne(X: np.ndarray, n_components: int = 2, random_state: int = 42) -> np.ndarray:
+def apply_tsne(X, n_components = 2, random_state = 42):
     """Apply t-SNE to the data.
 
     The sklearn.manifold.TSNE class may be used.  The function should return the
     2‑D embedding.
     """
-    raise NotImplementedError("Implement t-SNE transformation here")
+    tsne = TSNE(n_components=n_components, random_state=random_state)
+    return tsne.fit_transform(X)
 
-
-def apply_umap(X: np.ndarray, n_components: int = 2, random_state: int = 42) -> np.ndarray:
+def apply_umap(X, n_components = 2, random_state = 42):
     """Apply UMAP to the data.
 
     Requires the `umap-learn` package.  Return an array of shape
     (n_samples, n_components).
     """
-    raise NotImplementedError("Implement UMAP transformation here")
+    umap_model = umap.UMAP(n_components=n_components, random_state=random_state)
+    return umap_model.fit_transform(X)
