@@ -57,6 +57,7 @@ def plot_representation_comparison(
         Output file path for the saved figure.
     """
     fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+    fig.suptitle("Representation Comparison(True Labels)", fontsize=16)
     for ax, data, name in zip(
         axes, (pca, tsne, umap), ("PCA", "t-SNE", "UMAP")
     ):
@@ -65,7 +66,7 @@ def plot_representation_comparison(
         ax.set_xlabel("Component 1")
         ax.set_ylabel("Component 2")
     fig.colorbar(sc, ax=axes.ravel().tolist(), orientation="horizontal", fraction=0.05)
-    fig.tight_layout()
+    fig.tight_layout([0,0,1,0.95])
     fig.savefig(filename)
     plt.close(fig)
 
@@ -90,6 +91,7 @@ def plot_cluster_comparison(
         Output file path for the saved figure.
     """
     fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+    fig.suptitle("Cluster Comparison(K-Means Clusters)", fontsize=16)
     for ax, data, name in zip(
         axes, (pca, tsne, umap), ("PCA", "t-SNE", "UMAP")
     ):
@@ -98,6 +100,6 @@ def plot_cluster_comparison(
         ax.set_xlabel("Component 1")
         ax.set_ylabel("Component 2")
     fig.colorbar(sc, ax=axes.ravel().tolist(), orientation="horizontal", fraction=0.05)
-    fig.tight_layout()
+    fig.tight_layout([0,0,1,0.95])
     fig.savefig(filename)
     plt.close(fig)
