@@ -5,12 +5,12 @@ Wrappers for k-means and hierarchical clustering.  All functions should return
 labels and any additional information required for plotting or evaluation.
 """
 
-from typing import Any, Tuple
+from sklearn.cluster import KMeans, AgglomerativeClustering
 
 import numpy as np
 
 
-def run_kmeans(X: np.ndarray, n_clusters: int = 3, random_state: int = 42) -> Tuple[np.ndarray, Any]:
+def run_kmeans(X, n_clusters = 3, random_state = 42) :
     """Run k-means clustering and return labels and cluster centers.
 
     Parameters
@@ -29,10 +29,12 @@ def run_kmeans(X: np.ndarray, n_clusters: int = 3, random_state: int = 42) -> Tu
     centers : Any
         Object representing cluster centers (e.g. np.ndarray).
     """
-    raise NotImplementedError("Implement k-means here")
+    model = KMeans(n_clusters=n_clusters, random_state=random_state, n_init=10)
+    labels = model.fit_predict(X)
+    return labels, model.cluster_centers_
 
 
-def run_hierarchical(X: np.ndarray, n_clusters: int = 3, linkage: str = "ward") -> np.ndarray:
+def run_hierarchical(X, n_clusters = 3, linkage = "ward"):
     """Perform agglomerative clustering and return labels.
 
     Parameters
@@ -49,4 +51,6 @@ def run_hierarchical(X: np.ndarray, n_clusters: int = 3, linkage: str = "ward") 
     labels : np.ndarray
         Integer labels for each sample.
     """
-    raise NotImplementedError("Implement hierarchical clustering here")
+    model = AgglomerativeClustering(n_clusters=n_clusters, linkage=linkage)
+    labels = model.fit_predict(X)
+    return labels
